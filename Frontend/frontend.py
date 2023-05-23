@@ -4,9 +4,8 @@ import streamlit as st
 import requests
 import pandas as pd
 
-BASE_URL = os.environ.get('BASE_URL')  # Change this to your FastAPI server URL
+BASE_URL = os.environ.get('BASE_URL')
 
-# Set page configuration
 st.set_page_config(
     page_title="Israeli Flight Statistics",
     page_icon=":airplane:",
