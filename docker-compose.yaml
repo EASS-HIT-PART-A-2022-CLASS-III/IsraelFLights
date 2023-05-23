@@ -1,0 +1,38 @@
+# docker-compose.yml
+version: "3.9"
+services:
+  db:
+    image: postgres:latest
+    environment:
+      DATABASE_URL: postgresql://postgres:123456@db:5432/israel_flights
+      POSTGRES_PASSWORD: 123456
+      BASE_URL: http://localhost:8000/
+
+  backend:
+    build: ./backend
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    volumes:
+      - ./backend:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+
+  fetcher:
+    build: ./backend
+    command: ["python", "/app/fetch_flights_periodically.py"]
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    command: ["streamlit", "run", "/Frontend/frontend.py"]
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 8501:8501
+    depends_on:
+      - backend

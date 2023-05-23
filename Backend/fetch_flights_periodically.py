@@ -4,7 +4,6 @@ from main import map_flight_data
 from database import database, insert_or_update_flight, create_tables
 from dotenv import load_dotenv
 import logging
-from typing import Tuple
 
 logging.basicConfig(level=logging.INFO)
 
