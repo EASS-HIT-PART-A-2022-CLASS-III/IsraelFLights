@@ -1,80 +1,33 @@
-# Flight Status API
+# Israel Flights Tracker
 
-This is a RESTful API built using FastAPI that provides flight status information, including real-time updates, peak hours, and other useful statistics. The API retrieves data from the Israeli Ministry of Transportation's database.
+This project is designed to fetch and display real-time flight information for flights in and out of Israel. It consists of a backend API built with FastAPI, a frontend built with Streamlit, a PostgreSQL database for storing flight data, and a Python script that fetches flight data periodically.
 
-## Features
+## Project Structure
 
-- Retrieve flight information
-- Register for flight status updates via email
-- Get peak hours for flights
-- Get flight status counts
-- Get top airlines
-- Get busiest routes
-- Get daily and weekly average flight delays
+- `./backend` - Contains the FastAPI application.
+- `./frontend` - Contains the Streamlit application.
+- `fetch_flights_periodically.py` - Python script to fetch flight data periodically.
+
+## Prerequisites
+
+- Docker and Docker Compose installed on your machine.
 
 ## Installation
 
-1. Clone this repository to your local machine.
+1. Clone the repository to your local machine.
 
-```bash
-git clone https://github.com/EASS-HIT-PART-A-2022-CLASS-III/IsraeliFlights.git
-cd IsraeliFlights
+2. From the project root, run the following command to build and start all services:
+
+```shell
+docker-compose up --build -d
 ```
 
-2. Create and activate a virtual environment.
+## Accessing the Applications
+* The FastAPI backend can be accessed at http://localhost:8000.
+* The Streamlit frontend can be accessed at http://localhost:8501.
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
+## Environment Variables
+The following environment variables are used in this project:
 
-3. Install the required dependencies.
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Create a `.env` file in the root directory and populate it with the required environment variables.
-
-```ini
-DATABASE_URL=your_database_url
-EMAIL_USERNAME=your_email_username
-EMAIL_PASSWORD=your_email_password
-EMAIL_HOST=your_email_host
-EMAIL_PORT=your_email_port
-```
-
-5. Run the API using the following command:
-
-```bash
-uvicorn main:app --reload
-```
-
-6. To run the script that fetches and updates flight data periodically, execute:
-
-```bash
-python featch_flights_periodically.py
-```
-
-## Endpoints
-
-1. `/flights` - Get all flights.
-2. `/register` - Register for flight status updates via email.
-3. `/peak_hours` - Get peak hours for flights.
-4. `/flight_status_counts` - Get flight status counts.
-5. `/top_airlines` - Get top airlines.
-6. `/busiest_routes` - Get busiest routes.
-7. `/daily_average_delay` - Get daily average flight delays.
-8. `/weekly_average_delay` - Get weekly average flight delays.
-
-## Usage
-
-To use the API, send requests to the appropriate endpoints. For example:
-
-```
-http://localhost:8000/flights
-```
-
-## License
-
-This project is licensed under the MIT License.
+* DATABASE_URL: The connection string for the PostgreSQL database.
+* BASE_URL: The base URL for the backend API.
