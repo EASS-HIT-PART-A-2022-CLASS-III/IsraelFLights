@@ -96,5 +96,5 @@ The following environment variables are used in this project:
 * POSTGRES_PASSWORD: The postgres password
 
 # Video
-[![Israel Flights Tracker](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://www.youtube.com/watch?v=EWXSPHQQCF0 "Israel Flights Tracker")
+[![Israel Flights Tracker]](./video.mp4 "Israel Flights Tracker")
 
