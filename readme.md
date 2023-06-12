@@ -2,6 +2,10 @@
 
 This project is designed to fetch and display real-time flight information for flights in and out of Israel. It consists of a backend API built with FastAPI, a frontend built with Streamlit, a PostgreSQL database for storing flight data, and a Python script that fetches flight data periodically.
 
+## High level architecture
+
+![Architecture](Arch.png)
+
 ## Project Structure
 
 - `./backend` - Contains the FastAPI application.
