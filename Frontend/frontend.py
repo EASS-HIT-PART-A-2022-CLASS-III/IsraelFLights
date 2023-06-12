@@ -1,11 +1,16 @@
+import logging
 import os
 
 import streamlit as st
 import requests
 import pandas as pd
 
-BASE_URL = os.environ.get('BASE_URL')
+BASE_URL = os.environ.get('BASE_URL', '')
+if not BASE_URL:
+    raise ValueError("Base url not defined in .env file")
 
+
+logging.warning(f"base url is: {BASE_URL}")
 st.set_page_config(
     page_title="Israeli Flight Statistics",
     page_icon=":airplane:",
@@ -18,10 +23,11 @@ st.title('Israeli Flight Statistics')
 st.sidebar.header('Menu')
 options = ['View Flights', 'Register Flight Status Update', 'Peak Hours', 'Flight Status Counts', 'Top Airlines', 'Busiest Routes', 'Average Delay']
 choice = st.sidebar.selectbox("Choose an option", options)
-
+logging.warning(f"base url is: {BASE_URL}")
 if choice == 'View Flights':
     st.header('Flights')
     res = requests.get(f'{BASE_URL}/flights')
+    logging.info(res)
     data = res.json()
     df = pd.DataFrame(data)
     st.dataframe(df)

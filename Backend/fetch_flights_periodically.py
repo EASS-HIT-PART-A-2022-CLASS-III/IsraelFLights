@@ -2,12 +2,10 @@ import asyncio
 import httpx
 from main import map_flight_data
 from database import database, insert_or_update_flight, create_tables
-from dotenv import load_dotenv
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
-load_dotenv()
 
 API_URL = f"https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5"
 

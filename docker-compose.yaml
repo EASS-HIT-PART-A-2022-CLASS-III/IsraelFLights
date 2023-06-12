@@ -1,13 +1,11 @@
-# docker-compose.yml
 version: "3.9"
 services:
   db:
     image: postgres:latest
     environment:
-      DATABASE_URL: postgresql://postgres:123456@db:5432/israel_flights
-      POSTGRES_PASSWORD: 123456
-      BASE_URL: http://localhost:8000/
-
+      POSTGRES_DB: israel_flights
+    env_file:
+      - .env
   backend:
     build: ./backend
     command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
@@ -17,7 +15,8 @@ services:
       - 8000:8000
     depends_on:
       - db
-
+    env_file:
+      - .env
 
   fetcher:
     build: ./backend
@@ -26,13 +25,18 @@ services:
       - ./backend:/app
     depends_on:
       - db
+    env_file:
+      - .env
 
   frontend:
     build: ./frontend
-    command: ["streamlit", "run", "/Frontend/frontend.py"]
+    command: ["streamlit", "run", "/app/frontend.py"]
+    environment:
+      BASE_URL: http://backend:8000
     volumes:
       - ./frontend:/app
     ports:
       - 8501:8501
     depends_on:
       - backend
+

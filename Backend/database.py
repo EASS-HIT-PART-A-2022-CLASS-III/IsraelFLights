@@ -1,5 +1,4 @@
 import logging
-
 from databases import Database
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 from sqlalchemy.sql import select
@@ -8,9 +7,10 @@ from dotenv import load_dotenv
 from typing import Tuple
 import os
 
-load_dotenv()
 
-DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = os.environ.get('DATABASE_URL', {})
+if not DATABASE_URL:
+    raise ValueError('Database url environment variable doesnt exists')
 metadata = MetaData()
 
 flights = Table(

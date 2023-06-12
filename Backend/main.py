@@ -1,11 +1,10 @@
-from fastapi import FastAPI, HTTPException, Depends
-from fastapi.security import HTTPBasic, HTTPBasicCredentials
-from pydantic import BaseModel, EmailStr
+from fastapi import FastAPI
+from fastapi.security import HTTPBasic
+from pydantic import BaseModel
 from typing import List, Optional
 from database import database, create_tables, get_flight_by_condition, flights
 from datetime import datetime, date, timedelta
-from sqlalchemy import func, select, and_, Integer
-from email_util import send_email
+from sqlalchemy import func, select
 from collections import Counter
 
 app = FastAPI()
@@ -72,27 +71,6 @@ async def get_flights():
     flights_data = await get_flight_by_condition(None)
     return flights_data
 
-
-class FlightStatusNotification(BaseModel):
-    email: EmailStr
-    flight_number: str
-
-
-@app.post("/register")
-async def register_flight_status_update(notification: FlightStatusNotification,
-                                        credentials: HTTPBasicCredentials = Depends(security)):
-    flight_data = await get_flight_by_condition(flights.c.flight_number.ilike(f"%{notification.flight_number}%"))
-
-    if not flight_data:
-        raise HTTPException(status_code=404, detail="Flight not found")
-
-    flight = flight_data[0]
-    subject = f"Flight Status Update: {flight['flight_number']}"
-    content = f"Your flight {flight['flight_number']} operated by {flight['operator_name']} is scheduled to depart at {flight['scheduled_time_of_departure']} and the current estimated departure time is {flight['estimated_time_of_departure']}."
-
-    send_email(subject, content, notification.email)
-
-    return {"detail": "Flight status update email sent successfully"}
 
 
 def filter_flights_current_day(flights):
