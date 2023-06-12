@@ -95,3 +95,5 @@ The following environment variables are used in this project:
 * BASE_URL: The base URL for the backend API.
 * POSTGRES_PASSWORD: The postgres password
 
+# Video
+[![IsraelFlights](https://www.youtube.com/embed/EWXSPHQQCF0)
