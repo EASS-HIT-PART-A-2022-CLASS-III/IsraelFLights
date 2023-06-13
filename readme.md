@@ -13,7 +13,6 @@ This project is designed to fetch and display real-time flight information for f
 - `fetch_flights_periodically.py` - Python script to fetch flight data periodically.
 - 
 ## End points:
-Certainly! Here's a breakdown of the endpoints in the FastAPI backend and what each of them does:
 
 1. GET `/flights`
    - Retrieves a list of flights.
