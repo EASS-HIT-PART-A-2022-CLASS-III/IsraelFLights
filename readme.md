@@ -1,6 +1,7 @@
 # Israel Flights Tracker
 
-This project is designed to fetch and display real-time flight information for flights in and out of Israel. It consists of a backend API built with FastAPI, a frontend built with Streamlit, a PostgreSQL database for storing flight data, and a Python script that fetches flight data periodically.
+This project is designed to fetch and display real-time flight information for flights in Israel.
+It consists of a backend API built with FastAPI, a frontend built with Streamlit, a PostgreSQL database for storing flight data, and a Python script that fetches flight data periodically every 15 min.
 
 ## High level architecture
 
@@ -48,8 +49,6 @@ These endpoints provide various flight-related information such as the list of f
 - Docker and Docker Compose installed on your machine.
 
 ## Installation
-
-Apologies for the confusion. To clone the repository and start the project using Docker Compose, follow these steps:
 
 1. Open a terminal or command prompt.
 
